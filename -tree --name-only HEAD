@@ -1,0 +1,29 @@
+[33m99ce1e0[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m Prepare Advocate Madan Dey demo website
+ Kanchan sir photo 1.jpg                            | Bin [31m0[m -> [32m6156[m bytes
+ Kanchan sir photo 2.jpg                            | Bin [31m0[m -> [32m6076[m bytes
+ admin.html                                         | 104 [32m+++++[m
+ assets/court-orders/demo_document_01.pdf           |  74 [32m+++[m
+ assets/court-orders/demo_document_02.pdf           |  74 [32m+++[m
+ assets/court-orders/demo_document_03.pdf           |  74 [32m+++[m
+ assets/gallery/gallery-01-male-advocate.jpg        | Bin [31m0[m -> [32m79015[m bytes
+ assets/gallery/gallery-02-law-books-documents.jpg  | Bin [31m0[m -> [32m78183[m bytes
+ assets/gallery/gallery-03-law-chamber.jpg          | Bin [31m0[m -> [32m103322[m bytes
+ assets/gallery/gallery-04-female-advocate.jpg      | Bin [31m0[m -> [32m57677[m bytes
+ .../gallery-05-advocates-discussing-case.jpg       | Bin [31m0[m -> [32m70143[m bytes
+ assets/gallery/gallery-06-calcutta-high-court.jpg  | Bin [31m0[m -> [32m113509[m bytes
+ assets/gallery/gallery-07.png                      | Bin [31m0[m -> [32m2195344[m bytes
+ assets/gallery/gallery-08.png                      | Bin [31m0[m -> [32m1999940[m bytes
+ assets/gallery/gallery-09.jfif                     | Bin [31m0[m -> [32m123443[m bytes
+ assets/gallery/gallery-10.png                      | Bin [31m0[m -> [32m1993269[m bytes
+ assets/gallery/gallery-11.jfif                     | Bin [31m0[m -> [32m82411[m bytes
+ assets/gallery/kanchan-das-02.webp                 | Bin [31m71526[m -> [32m0[m bytes
+ assets/gallery/kanchan-das-03.webp                 | Bin [31m56328[m -> [32m0[m bytes
+ assets/gallery/kanchan-das-04.webp                 | Bin [31m80016[m -> [32m0[m bytes
+ assets/profile/kanchan-das-01.webp                 | Bin [31m62438[m -> [32m0[m bytes
+ assets/profile/madan-dey-hero.png                  | Bin [31m0[m -> [32m2317437[m bytes
+ css/style.css                                      | 497 [32m+++++++++++++++++++++[m
+ index.html                                         |  78 [32m++[m[31m--[m
+ js/app.js                                          | 432 [32m+++++++++++++[m[31m-----[m
+ readme                                             |  18 [32m+[m
+ site-data.json                                     | 217 [32m+++++[m[31m----[m
+ 27 files changed, 1358 insertions(+), 210 deletions(-)

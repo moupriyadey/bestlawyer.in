@@ -169,8 +169,8 @@
 "gallery": [
   {
     "image": "assets/gallery/gallery-01-male-advocate.jpg",
-    "caption": "Advocate in a Professional Chamber",
-    "alt": "Fictional male advocate in a law office"
+    "caption": "Advocate in Professional Chamber",
+    "alt": "Fictional  advocate in a law office"
   },
   {
     "image": "assets/gallery/gallery-02-law-books-documents.jpg",
@@ -179,13 +179,13 @@
   },
   {
     "image": "assets/gallery/gallery-03-law-chamber.jpg",
-    "caption": "Professional Law Chamber",
+    "caption": "New Chamber",
     "alt": "Illustrative law chamber interior"
   },
   {
     "image": "assets/gallery/gallery-04-female-advocate.jpg",
-    "caption": "Female Advocate",
-    "alt": "Fictional female advocate in professional attire"
+    "caption": "Junior Advocate",
+    "alt": "Fictional junior advocate in professional attire"
   },
   {
     "image": "assets/gallery/gallery-05-advocates-discussing-case.jpg",
