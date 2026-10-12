@@ -17,6 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             renderProfile();
             renderServices();
+            renderPracticeKeywords();
             renderGallery();
             renderCourtOrders();
             renderContact();
@@ -200,113 +201,222 @@ if (footerEmail && profile.email) {
 
 /* ================= SERVICES ================= */
 
-function renderServices() {
 
-    const grid = document.getElementById("services-grid");
+/* ===== Compact Practice-Area Cards ===== */
+
+const practiceKeywords = [
+    { title: "Debt Recovery & DRT", serviceId: "drt-recovery" },
+    { title: "Military & Service Law", serviceId: "aft-military-law" },
+    { title: "Pension & Disability Matters", serviceId: "disability-pension" },
+    { title: "Civil & Landlord-Tenant Disputes", serviceId: "civil-matters" },
+    { title: "Property & Real Estate", serviceId: "land-property" },
+    { title: "Criminal & Cyber Law", serviceId: "criminal-cyber" },
+    { title: "Family & Divorce Matters", serviceId: "matrimonial-family" },
+    { title: "Banking & Financial Disputes", serviceId: "banking-financial" },
+    { title: "Labour & Employment Law", serviceId: "labour-employment" },
+    { title: "Consumer Protection", serviceId: "consumer-protection" },
+    { title: "Cheque Bounce Cases", serviceId: "cheque-bounce" },
+    { title: "Trademark & Intellectual Property", serviceId: "trademark-ip" },
+    { title: "Company & Taxation Matters", serviceId: "company-taxation" }
+];
+
+
+/* ===== Render Compact Cards ===== */
+
+function renderPracticeKeywords() {
+    const grid = document.getElementById("practice-keywords-grid");
+
+    if (!grid) return;
 
     grid.innerHTML = "";
 
+    practiceKeywords.forEach(item => {
+        const card = document.createElement("button");
 
-    if (!siteData.services || siteData.services.length === 0) {
+        card.type = "button";
+        card.className = "practice-keyword-card";
+        card.textContent = item.title;
+        card.setAttribute("aria-label", `Learn about ${item.title}`);
 
-        grid.innerHTML =
-            `<div class="col-12 text-center text-white">
-                Practice areas will be added shortly.
-             </div>`;
-
-        return;
-    }
-
-
-    siteData.services.forEach(service => {
-
-        const card = document.createElement("div");
-
-        card.className = "col-md-6 col-lg-4";
-
-
-        card.innerHTML = `
-            <div class="service-card"
-                 onclick="openServiceModal('${service.id}')">
-
-                <div class="service-icon">
-                    <i class="fas ${service.icon || "fa-scale-balanced"}"></i>
-                </div>
-
-                <h4>${service.title}</h4>
-
-                <p>${service.short}</p>
-
-                <span class="service-read">
-                    Read Details
-                    <i class="fas fa-arrow-right ms-1"></i>
-                </span>
-
-            </div>
-        `;
-
+        card.addEventListener("click", () => {
+            openServiceModal(item.serviceId, item.title);
+        });
 
         grid.appendChild(card);
-
     });
-
 }
 
 
-/* ================= SERVICE POPUP ================= */
+/* ===== Render Existing Detailed Cards ===== */
 
-function openServiceModal(serviceId) {
+function renderServices() {
+    const grid = document.getElementById("services-grid");
 
-    const service =
-        siteData.services.find(item => item.id === serviceId);
+    if (!grid) return;
 
-    if (!service) return;
+    grid.innerHTML = "";
 
-
-    document.getElementById("modalServiceTitle").textContent =
-        service.title;
-
-
-    const body = document.getElementById("modalServiceBody");
-
-    body.innerHTML = "";
-
-
-    if (Array.isArray(service.paragraphs)) {
-
-        service.paragraphs.forEach(paragraph => {
-
-            const p = document.createElement("p");
-
-            p.textContent = paragraph;
-
-            body.appendChild(p);
-
-        });
-
-    } else {
-
-        const p = document.createElement("p");
-
-        p.textContent = service.full || "";
-
-        body.appendChild(p);
-
+    if (!siteData.services || siteData.services.length === 0) {
+        grid.innerHTML = `
+            <div class="col-12 text-center text-white">
+                Practice areas will be added shortly.
+            </div>`;
+        return;
     }
 
+    siteData.services.forEach(service => {
+        const column = document.createElement("div");
+
+        column.className = "col-md-6 col-lg-4";
+
+        const card = document.createElement("div");
+        card.className = "service-card";
+        card.setAttribute("role", "button");
+        card.setAttribute("tabindex", "0");
+        card.setAttribute("aria-label", `Read about ${service.title}`);
+
+        const icon = document.createElement("div");
+        icon.className = "service-icon";
+
+        const iconElement = document.createElement("i");
+        iconElement.className = `fas ${service.icon || "fa-scale-balanced"}`;
+        iconElement.setAttribute("aria-hidden", "true");
+        icon.appendChild(iconElement);
+
+        const heading = document.createElement("h4");
+        heading.textContent = service.title;
+
+        const description = document.createElement("p");
+        description.textContent = service.short || "";
+
+        const readMore = document.createElement("span");
+        readMore.className = "service-read";
+        readMore.textContent = "Read Details ";
+
+        const arrow = document.createElement("i");
+        arrow.className = "fas fa-arrow-right ms-1";
+        arrow.setAttribute("aria-hidden", "true");
+        readMore.appendChild(arrow);
+
+        card.append(icon, heading, description, readMore);
+
+        card.addEventListener("click", () => {
+            openServiceModal(service.id);
+        });
+
+        card.addEventListener("keydown", event => {
+            if (event.key === "Enter" || event.key === " ") {
+                event.preventDefault();
+                openServiceModal(service.id);
+            }
+        });
+
+        column.appendChild(card);
+        grid.appendChild(column);
+    });
+}
+
+
+/* ===== Popup Content for Additional Demonstration Topics ===== */
+
+const additionalPracticeDetails = {
+    "criminal-cyber": {
+        title: "Criminal & Cyber Law",
+        paragraphs: [
+            "This fictional demonstration section illustrates how general information about criminal-law and cyber-related issues may be organised.",
+            "Illustrative topics may include criminal proceedings, cybercrime complaints and related legal processes, subject to applicable law and jurisdiction.",
+            "The actual services offered must be confirmed by the advocate before publication."
+        ]
+    },
+    "labour-employment": {
+        title: "Labour & Employment Law",
+        paragraphs: [
+            "This fictional demonstration section presents general information about employment-related disputes.",
+            "Illustrative topics may include wages, employment terms, workplace disputes and applicable labour-law proceedings.",
+            "The appropriate legal route depends on the facts and applicable law."
+        ]
+    },
+    "consumer-protection": {
+        title: "Consumer Protection",
+        paragraphs: [
+            "This fictional demonstration section illustrates information about consumer rights and consumer disputes.",
+            "Illustrative topics may include defective goods, deficient services and consumer complaints before competent forums.",
+            "The appropriate remedy depends on the facts and applicable law."
+        ]
+    },
+    "cheque-bounce": {
+        title: "Cheque Bounce Cases",
+        paragraphs: [
+            "This fictional demonstration section provides an example of how information about cheque dishonour matters may be presented.",
+            "Applicable legal requirements, notices, limitation periods and procedures depend on the circumstances of each matter.",
+            "Actual professional services must be confirmed before publication."
+        ]
+    },
+    "company-taxation": {
+        title: "Company & Taxation Matters",
+        paragraphs: [
+            "This fictional demonstration section illustrates general information about company-related and taxation matters.",
+            "Illustrative topics may include company compliance, commercial disputes and tax-related proceedings, subject to the relevant professional qualifications and jurisdiction.",
+            "The advocate must verify the scope and accuracy of this information before publication."
+        ]
+    }
+};
+
+
+/* ===== Open the Shared Service Popup ===== */
+
+function openServiceModal(serviceId, fallbackTitle = "") {
+    const service = (siteData.services || []).find(
+        item => item.id === serviceId
+    );
+
+    const extra = additionalPracticeDetails[serviceId];
+
+    if (!service && !extra) return;
+
+    const title = service ? service.title : extra.title;
+    const paragraphs = service
+        ? service.paragraphs
+        : extra.paragraphs;
+
+    document.getElementById("modalServiceTitle").textContent =
+        title || fallbackTitle || "Service Details";
+
+    const body = document.getElementById("modalServiceBody");
+    body.innerHTML = "";
+
+    if (Array.isArray(paragraphs)) {
+        paragraphs.forEach(paragraph => {
+            const p = document.createElement("p");
+            p.textContent = paragraph;
+            body.appendChild(p);
+        });
+    } else {
+        const p = document.createElement("p");
+        p.textContent = service?.full || "";
+        body.appendChild(p);
+    }
+
+    const profile = siteData.profile || {};
+    const whatsappNumber = String(profile.whatsapp || "").replace(/\D/g, "");
 
     const message =
-        `Hello Advocate Kanchan Das, I would like to enquire regarding ${service.title}.`;
+        `Hello, I would like to enquire regarding ${title}.`;
 
-    document.getElementById("modalWaBtn").href =
-        `https://wa.me/${siteData.profile.whatsapp}?text=${encodeURIComponent(message)}`;
+    const waButton = document.getElementById("modalWaBtn");
 
+    if (whatsappNumber) {
+        waButton.href =
+            `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+        waButton.style.display = "";
+    } else {
+        waButton.removeAttribute("href");
+        waButton.style.display = "none";
+    }
 
-    const modal =
-        new bootstrap.Modal(document.getElementById("serviceModal"));
-
+    const modalElement = document.getElementById("serviceModal");
+    const modal = bootstrap.Modal.getOrCreateInstance(modalElement);
     modal.show();
-
 }
 
 
@@ -706,6 +816,12 @@ function startContinuousLoop(elementId) {
 
     const images = track.querySelectorAll("img");
 
+    // The loop waits for image readiness before measuring card widths.
+    // Off-screen lazy images may never load, preventing the loop from starting.
+    images.forEach(img => {
+        if (!img.complete) img.loading = "eager";
+    });
+
     const imagePromises = Array.from(images).map(img => {
 
         if (img.complete) {
@@ -851,36 +967,21 @@ function startContinuousLoop(elementId) {
            ------------------------------------------------- */
 
        track.addEventListener("pointerdown", event => {
+            // Keep buttons/links usable, but allow dragging to begin on images.
+            const interactiveElement = event.target.closest(
+                "button, a, input, textarea, select, label"
+            );
+            if (interactiveElement) return;
 
-    /*
-       Do not start the slider when the user is
-       interacting with a button or other control.
-       This keeps View PDF / View Full Order clickable.
-    */
+            dragging = true;
+            hasDragged = false;
+            pointerStartX = event.clientX;
+            positionAtPointerStart = position;
+            track.classList.add("is-dragging");
 
-    const interactiveElement =
-        event.target.closest(
-            "button, a, input, textarea, select, label"
-        );
-
-    if (interactiveElement) {
-        return;
-    }
-
-
-    dragging = true;
-
-    hasDragged = false;
-
-    pointerStartX = event.clientX;
-
-    positionAtPointerStart = position;
-
-    track.classList.add("is-dragging");
-
-    track.setPointerCapture(event.pointerId);
-
-});
+            // Do not capture on pointerdown: a normal image tap must still
+            // generate a click for the lightbox. Capture only after drag begins.
+        });
 
 
         /* -------------------------------------------------
@@ -895,18 +996,19 @@ function startContinuousLoop(elementId) {
                 event.clientX - pointerStartX;
 
 
-            if (Math.abs(deltaX) > 8) {
+            if (Math.abs(deltaX) > 8 && !hasDragged) {
                 hasDragged = true;
+                // Capture only once this is a real drag so the swipe continues
+                // smoothly if the pointer leaves the track.
+                if (track.setPointerCapture) {
+                    try { track.setPointerCapture(event.pointerId); } catch (_) {}
+                }
             }
 
+            if (hasDragged) event.preventDefault();
 
-            /*
-               Dragging left moves cards left.
-               Dragging right moves cards right.
-            */
-
-            position =
-                positionAtPointerStart - deltaX;
+            // Dragging left moves cards left; dragging right moves them right.
+            position = positionAtPointerStart - deltaX;
 
             normalizePosition();
 
@@ -1010,17 +1112,145 @@ document.addEventListener("click", function (event) {
     collapseInstance.hide();
 });
 
-//close after selecting a menu link
-document.querySelectorAll(".navbar-collapse .nav-link").forEach(function (link) {
-    link.addEventListener("click", function () {
-        const navbarCollapse = document.querySelector(".navbar-collapse");
+// Navigate after the mobile menu has collapsed so its changing height does
+// not leave the destination heading hidden behind the sticky navbar.
+document.querySelectorAll(".main-navbar a[href^='#']").forEach(link => {
+    link.addEventListener("click", event => {
+        const href = link.getAttribute("href");
+        if (!href || href === "#") return;
 
-        if (!navbarCollapse) return;
+        const target = document.getElementById(href.slice(1));
+        if (!target) return;
 
-        const collapseInstance =
-            bootstrap.Collapse.getInstance(navbarCollapse) ||
-            new bootstrap.Collapse(navbarCollapse, { toggle: false });
+        event.preventDefault();
 
-        collapseInstance.hide();
+        const navbarCollapse = document.getElementById("navMenu");
+        const menuIsOpen = navbarCollapse &&
+            navbarCollapse.classList.contains("show") &&
+            window.matchMedia("(max-width: 991.98px)").matches;
+
+        const scrollToTarget = () => {
+            if (window.location.hash !== href) history.pushState(null, "", href);
+            const navbar = document.querySelector(".main-navbar");
+            const offset = (navbar ? navbar.getBoundingClientRect().height : 0) + 12;
+            const top = target.getBoundingClientRect().top + window.scrollY - offset;
+            window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
+        };
+
+        if (menuIsOpen) {
+            const collapseInstance =
+                bootstrap.Collapse.getOrCreateInstance(navbarCollapse, { toggle: false });
+            navbarCollapse.addEventListener("hidden.bs.collapse", scrollToTarget, { once: true });
+            collapseInstance.hide();
+        } else {
+            scrollToTarget();
+        }
     });
+});
+
+/* ===== Click-to-Enlarge Image Lightbox ===== */
+
+let activeImageLightbox = null;
+let lightboxHistoryOpen = false;
+let previousBodyOverflow = "";
+
+function removeImageLightbox() {
+    if (!activeImageLightbox) return;
+
+    activeImageLightbox.remove();
+    activeImageLightbox = null;
+    document.body.style.overflow = previousBodyOverflow;
+    lightboxHistoryOpen = false;
+}
+
+function requestCloseImageLightbox() {
+    if (!activeImageLightbox) return;
+
+    if (lightboxHistoryOpen) {
+        // The popstate handler closes the lightbox.
+        history.back();
+    } else {
+        removeImageLightbox();
+    }
+}
+
+document.addEventListener("click", function (event) {
+   
+const image = event.target.closest(
+   '#hero-photo, #gallery-track img, ' +
+'#gallery img, #gallery-grid img, .gallery-section img'
+);
+
+    if (!image) return;
+
+    event.preventDefault();
+
+    if (activeImageLightbox) {
+        removeImageLightbox();
+        if (lightboxHistoryOpen) {
+            history.back();
+        }
+    }
+
+    previousBodyOverflow = document.body.style.overflow;
+
+    const overlay = document.createElement("div");
+    overlay.className = "image-lightbox";
+    overlay.setAttribute("role", "dialog");
+    overlay.setAttribute("aria-modal", "true");
+    overlay.setAttribute("aria-label", "Enlarged image");
+
+    const enlargedImage = document.createElement("img");
+    enlargedImage.className = "image-lightbox-image";
+    enlargedImage.src = image.currentSrc || image.src;
+    enlargedImage.alt = image.alt || "Enlarged website image";
+
+    const closeButton = document.createElement("button");
+    closeButton.className = "image-lightbox-close";
+    closeButton.type = "button";
+    closeButton.innerHTML = "&times;";
+    closeButton.setAttribute("aria-label", "Close enlarged image");
+
+    overlay.appendChild(enlargedImage);
+    overlay.appendChild(closeButton);
+    document.body.appendChild(overlay);
+
+    activeImageLightbox = overlay;
+    document.body.style.overflow = "hidden";
+
+    closeButton.addEventListener("click", function (e) {
+        e.stopPropagation();
+        requestCloseImageLightbox();
+    });
+
+    overlay.addEventListener("click", function (e) {
+        // Close only when the backdrop is touched.
+        if (e.target === overlay) {
+            requestCloseImageLightbox();
+        }
+    });
+
+    // Add a browser-history entry so Back closes the image first.
+    history.pushState(
+        { ...(history.state || {}), imageLightbox: true },
+        "",
+        location.href
+    );
+    lightboxHistoryOpen = true;
+
+    closeButton.focus();
+});
+
+// Escape closes the enlarged image.
+document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape" && activeImageLightbox) {
+        requestCloseImageLightbox();
+    }
+});
+
+// Browser Back closes the lightbox instead of leaving the page.
+window.addEventListener("popstate", function () {
+    if (activeImageLightbox) {
+        removeImageLightbox();
+    }
 });

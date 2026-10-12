@@ -1,0 +1,18 @@
+Compliance with Rule 36 of the Bar Council of India
+
+fictional portfolio demo
+
+
+
+
+
+
+
+py -m http.server 5500
+
+or 
+
+python -m http.server 5500
+
+browser ...  http://localhost:5500
+

@@ -1628,3 +1628,500 @@ section {
 section {
     scroll-margin-top: 75px;
 }
+
+/* =========================================================
+   VISITOR-FIRST SECTION LAYOUT — REVISION 2
+   Keep section titles visible below the sticky navbar,
+   reduce unnecessary vertical travel, and preserve readable text.
+   ========================================================= */
+
+:root {
+    --section-nav-offset: 82px;
+}
+
+html {
+    scroll-padding-top: var(--section-nav-offset);
+}
+
+/* Anchor targets should not add a second offset on top of html scroll padding. */
+section {
+    scroll-margin-top: 0;
+}
+
+/* Compact, consistent section rhythm. */
+.section-padding {
+    padding: 62px 0;
+}
+
+.section-heading {
+    max-width: 980px;
+    margin: 0 auto 32px;
+}
+
+.section-heading span {
+    font-size: 0.76rem;
+    letter-spacing: 1.8px;
+}
+
+.section-heading h2 {
+    font-size: clamp(1.9rem, 3.1vw, 2.55rem);
+    line-height: 1.16;
+    margin: 6px 0 10px;
+}
+
+.section-heading p {
+    margin: 8px auto 0;
+    line-height: 1.55;
+}
+
+.heading-line {
+    width: 58px;
+    height: 3px;
+}
+
+/* About: let the opening text arrive sooner after the heading. */
+#about .row {
+    row-gap: 28px;
+}
+
+#about .lead {
+    margin-bottom: 14px;
+    line-height: 1.62;
+}
+
+#about p:not(.lead) {
+    line-height: 1.58;
+    margin-bottom: 12px;
+}
+
+/* Practice Areas: keep the first row close to the section heading. */
+#services .section-heading {
+    margin-bottom: 28px;
+}
+
+#services-grid {
+    row-gap: 24px;
+}
+
+/* Orders and Gallery are visual sections; avoid excessive empty framing. */
+#orders .section-heading,
+#gallery .section-heading {
+    margin-bottom: 28px;
+}
+
+/* Chamber: heading first, then the two useful visitor actions. */
+#chamber .section-heading {
+    margin-bottom: 30px;
+}
+
+#chamber .row {
+    row-gap: 24px;
+}
+
+/* Contact is intentionally a clear final call-to-action, but slightly tighter. */
+.contact-section {
+    padding: 56px 0;
+}
+
+.contact-section h2 {
+    line-height: 1.15;
+}
+
+.contact-section p {
+    line-height: 1.55;
+    margin-bottom: 22px;
+}
+
+@media (max-width: 991.98px) {
+    :root {
+        --section-nav-offset: 74px;
+    }
+
+    .section-padding {
+        padding: 50px 0;
+    }
+
+    .section-heading {
+        margin-bottom: 26px;
+    }
+}
+
+@media (max-width: 767px) {
+    :root {
+        --section-nav-offset: 72px;
+    }
+
+    .section-padding {
+        padding: 44px 0;
+    }
+
+    .section-heading {
+        max-width: 100%;
+        margin-bottom: 24px;
+        padding: 0 6px;
+    }
+
+    .section-heading span {
+        font-size: 0.68rem;
+        letter-spacing: 1.35px;
+    }
+
+    .section-heading h2 {
+        font-size: 1.62rem;
+        line-height: 1.18;
+        margin: 5px 0 8px;
+    }
+
+    .section-heading p {
+        font-size: 0.91rem;
+        line-height: 1.48;
+        margin-top: 7px;
+    }
+
+    .heading-line {
+        width: 52px;
+        height: 3px;
+    }
+
+    #about .row {
+        row-gap: 22px;
+    }
+
+    #about .lead {
+        font-size: 1.04rem;
+        line-height: 1.58;
+    }
+
+    #about p:not(.lead) {
+        font-size: 0.93rem;
+        line-height: 1.55;
+    }
+
+    #services .section-heading,
+    #orders .section-heading,
+    #gallery .section-heading,
+    #chamber .section-heading {
+        margin-bottom: 22px;
+    }
+
+    #services-grid {
+        row-gap: 18px;
+    }
+
+    #chamber .row {
+        row-gap: 18px;
+    }
+
+    .contact-section {
+        padding: 46px 0;
+    }
+
+    .contact-section h2 {
+        font-size: 1.9rem;
+        line-height: 1.16;
+        margin: 6px 0 10px;
+    }
+
+    .contact-section p {
+        font-size: 0.92rem;
+        line-height: 1.5;
+        margin-bottom: 18px;
+    }
+}
+
+/* ===== Compact Neon Practice-Area Cards ===== */
+
+.keyword-area {
+    margin: 0 0 38px;
+    padding: 24px;
+    border: 1px solid rgba(0, 255, 220, 0.35);
+    border-radius: 18px;
+    background: rgba(5, 20, 32, 0.78);
+    box-shadow: 0 0 22px rgba(0, 255, 220, 0.08);
+}
+
+.keyword-heading {
+    margin-bottom: 18px;
+    color: #7fffee;
+    font-size: 1.15rem;
+    font-weight: 700;
+    text-align: center;
+}
+
+
+.practice-keywords-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 205px);
+    justify-content: center;
+    gap: 11px;
+}
+
+
+@media (min-width: 577px) {
+    .practice-keyword-card:last-child {
+        grid-column: 1 / -1;
+        justify-self: center;
+        width: 205px;
+    }
+}
+
+
+.practice-keyword-card {
+    width: 100%;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 11px 13px;
+    border: 1px solid #00e8d0;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #102b3b, #123e49);
+    color: #eaffff;
+    font-size: 0.88rem;
+    font-weight: 600;
+    text-align: center;
+    cursor: pointer;
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+
+.practice-keyword-card:hover,
+.practice-keyword-card:focus-visible {
+    transform: translateY(-3px);
+    background: linear-gradient(135deg, #124e59, #075d65);
+    box-shadow: 0 0 14px rgba(0, 255, 220, 0.35);
+    outline: none;
+}
+
+/* ===== Specialized Areas Heading ===== */
+
+.specialized-heading {
+    margin: 0 0 22px;
+    text-align: center;
+}
+
+.specialized-heading h3 {
+    color: #fff;
+    font-size: 1.65rem;
+    font-weight: 700;
+}
+
+.specialized-heading p {
+    color: rgba(255, 255, 255, 0.75);
+    margin-bottom: 0;
+}
+
+/* Make existing detailed cards slightly more compact */
+
+.service-card {
+    padding: 22px 18px;
+}
+
+.service-card h4 {
+    font-size: 1.08rem;
+}
+
+.service-card p {
+    font-size: 0.91rem;
+}
+
+/* Mobile layout */
+
+@media (max-width: 576px) {
+
+    .keyword-area {
+        padding: 16px 12px;
+    }
+
+    .practice-keywords-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+    }
+
+    .practice-keyword-card {
+        padding: 10px 7px;
+        font-size: 0.78rem;
+    }
+
+    .specialized-heading h3 {
+        font-size: 1.4rem;
+    }
+
+}
+
+/* ===== Full-screen Neon Image Lightbox ===== */
+
+img[src*="assets/profile/"],
+img[src*="assets/gallery/"] {
+    cursor: zoom-in;
+}
+
+.image-lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: rgba(5, 10, 20, 0.78);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    animation: lightboxFadeIn 0.22s ease;
+}
+
+.image-lightbox-image {
+    display: block;
+    max-width: 92vw;
+    max-height: 88vh;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    border: 2px solid rgba(100, 255, 235, 0.8);
+    border-radius: 12px;
+    box-shadow:
+        0 0 12px rgba(0, 255, 220, 0.65),
+        0 0 35px rgba(0, 255, 220, 0.3),
+        0 0 75px rgba(70, 100, 255, 0.22);
+    cursor: default;
+    animation: lightboxImageIn 0.25s ease;
+}
+
+.image-lightbox-close {
+    position: absolute;
+    top: 18px;
+    right: 24px;
+    width: 46px;
+    height: 46px;
+    display: grid;
+    place-items: center;
+    border: 1px solid rgba(100, 255, 235, 0.8);
+    border-radius: 50%;
+    background: rgba(10, 25, 40, 0.9);
+    color: #fff;
+    font-size: 30px;
+    line-height: 1;
+    cursor: pointer;
+    box-shadow: 0 0 16px rgba(0, 255, 220, 0.35);
+}
+
+.image-lightbox-close:hover {
+    background: #075d65;
+    box-shadow: 0 0 22px rgba(0, 255, 220, 0.7);
+}
+
+@keyframes lightboxFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes lightboxImageIn {
+    from {
+        opacity: 0;
+        transform: scale(0.96);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@media (max-width: 576px) {
+    .image-lightbox {
+        padding: 12px;
+    }
+
+    .image-lightbox-image {
+        max-width: 96vw;
+        max-height: 84vh;
+    }
+
+    .image-lightbox-close {
+        top: 12px;
+        right: 12px;
+        width: 42px;
+        height: 42px;
+    }
+}
+
+
+/* =========================================================
+   MOBILE NAVIGATION + IMAGE LIGHTBOX + LOOP REPAIR
+   Final overrides: keep after all earlier legacy rules.
+   ========================================================= */
+.hero-section::after { pointer-events: none; }
+
+#gallery-track .gallery-item img {
+    pointer-events: auto !important;
+    -webkit-user-drag: none;
+    user-select: none;
+    -webkit-user-select: none;
+    cursor: zoom-in;
+}
+
+:root { --section-nav-offset: 96px; }
+html { scroll-padding-top: var(--section-nav-offset); }
+section[id] { scroll-margin-top: 0 !important; }
+
+@media (max-width: 991.98px) {
+    :root { --section-nav-offset: 88px; }
+}
+
+@media (max-width: 576px) {
+    .image-lightbox { padding: 60px 12px 12px; }
+    .image-lightbox-image {
+        max-width: 96vw;
+        max-height: calc(100dvh - 90px);
+        object-fit: contain;
+    }
+    .image-lightbox-close { top: 10px; right: 10px; z-index: 1; }
+}
+
+/* =========================================
+   FLOATING CALL BUTTON — RIPPLE ANIMATION
+   ========================================= */
+
+#float-call {
+    position: relative;
+    isolation: isolate;
+    z-index: 1;
+}
+
+/* Two expanding ripple rings */
+#float-call::before,
+#float-call::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border: 2px solid rgba(13, 110, 253, 0.75);
+    border-radius: 50%;
+    animation: callRipple 2.4s ease-out infinite;
+    pointer-events: none;
+    z-index: -1;
+}
+
+#float-call::after {
+    animation-delay: 1.2s;
+}
+
+@keyframes callRipple {
+    0% {
+        transform: scale(1);
+        opacity: 0.75;
+    }
+
+    100% {
+        transform: scale(1.9);
+        opacity: 0;
+    }
+}
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    #float-call::before,
+    #float-call::after {
+        animation: none;
+    }
+}
